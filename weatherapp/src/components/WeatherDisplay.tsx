@@ -16,9 +16,11 @@ export default function WeatherDisplay({ location }: { location: string | null }
         const fetchWeather = async () => {
             if (!location) return;
             if (location === "") return;
-            //use city name
+
             var weather = await axios.get<WeatherResponse | null>(`https://localhost:7013/api/WeatherData/weather/city/${location}`);
-            console.log(weather.data?.weatherMeasurements[0].timeStamp);
+            if (!weather.data) return;
+            if (weather.data.weatherMeasurements.length === 0) return;
+
             var weatherMeasurements = weather.data?.weatherMeasurements.sort((a, b) => {
                 return new Date(a.timeStamp).getTime() - new Date(b.timeStamp).getTime();
             });
@@ -34,6 +36,10 @@ export default function WeatherDisplay({ location }: { location: string | null }
             });
     }, [location]);
 
+    const toCelsius = (kelvin: number) => {
+        return Math.round(kelvin - 273.15);
+    }
+
     return (
         <>
             <Grid>
@@ -47,18 +53,48 @@ export default function WeatherDisplay({ location }: { location: string | null }
                                 xAxis={[
                                     {
                                         dataKey: 'time',
-                                        valueFormatter: (value: WeatherMeasurement) => new Date(value.timeStamp).toLocaleString(),
+                                        valueFormatter: (value: Date) => new Date(value).toDateString(),
                                         min: new Date(measurements[0].timeStamp),
                                         max: new Date(measurements[measurements.length - 1].timeStamp),
                                     },
                                 ]}
-                                series={[{
-                                    dataKey: 'temperature',
-                                    valueFormatter: (value) => value?.toString() ?? "",
-                                    showMark: false,
-                                }]}
+                                series={[
+                                    {
+                                        dataKey: 'temperature',
+                                        valueFormatter: (value) => value?.toString() ?? "",
+                                        showMark: false,
+                                        label: "Temperature",
+                                        color: "#ff0000",
+                                    },
+                                    {
+                                        dataKey: 'minTemperature',
+                                        valueFormatter: (value) => value?.toString() ?? "",
+                                        showMark: false,
+                                        label: "Min temperature",
+                                        color: "#00ff00",
+                                    },
+                                    {
+                                        dataKey: 'maxTemperature',
+                                        valueFormatter: (value) => value?.toString() ?? "",
+                                        showMark: false,
+                                        label: "Max temperature",
+                                        color: "#0000ff",
+                                    },                                    {
+                                        dataKey: 'feelsLikeTemperature',
+                                        valueFormatter: (value) => value?.toString() ?? "",
+                                        showMark: false,
+                                        label: "Feels like",
+                                        color: "#ff00ff",
+                                    },
+                                ]}
                                 dataset={measurements.map((measurement) => {
-                                    return { time: new Date(measurement.timeStamp), temperature: measurement.temperature };
+                                    return {
+                                        time: new Date(measurement.timeStamp),
+                                        temperature: toCelsius(measurement.temperature),
+                                        minTemperature: toCelsius(measurement.temperatureMin),
+                                        maxTemperature: toCelsius(measurement.temperatureMax),
+                                        feelsLikeTemperature: toCelsius(measurement.temperatureFeelsLike),
+                                    };
                                 })}
                                 width={500}
                                 height={300}
