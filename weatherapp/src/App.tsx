@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import './App.css';
 import SideBar from './components/SideBar';
-import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid2';
+import WeatherDisplay from './components/WeatherDisplay';
 
 function App() {
+  const [location, setLocation] = useState<string | null>(null);
   return (
     <>
       {/* <header className="position-absolute top-0 w-100 text-center">
@@ -15,11 +17,9 @@ function App() {
           justifyContent: "center",
           alignItems: "center",
         }}>
-        <SideBar />
+        <SideBar setLocation={ setLocation } />
         <Grid size="grow">
-          <div>
-            <h1 className="top-0 w-100 text-center">The weather!</h1>
-          </div>
+          <WeatherDisplay location={ location } />
         </Grid>
       </Grid>
 
