@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import SideBar from './components/SideBar';
+import SideBar from './components/SideBar/SideBar';
 import Grid from '@mui/material/Grid2';
 import WeatherDisplay from './components/WeatherDisplay/WeatherDisplay';
 
