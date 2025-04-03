@@ -1,60 +1,60 @@
-# React + TypeScript + Vite
-Created a ReactTS template using Vite.
+# WeatherApp.UI
 
-# Bootstrap
-Added Bootstrap.
+WeatherApp.UI is a user interface project for a weather application. It provides a clean and intuitive interface for users to view weather forecasts and related information.
 
-# MUI
-Added MUI Material UI package for eye-friendly components.
+## Features
 
-# Axios
-Added Axios for building a promise based (async) http client.
+- Display weather for one of 5 selected locations.
 
+## Prerequisites
 
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
+## Installation
 
-## Expanding the ESLint configuration
+1. Clone the repository:
+  ```bash
+  git clone https://github.com/yourusername/weatherapp.ui.git
+  cd weatherapp.ui
+  ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. Install dependencies:
+  ```bash
+  npm install
+  ```
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+3. Start the development server:
+  ```bash
+  npm start
+  ```
+
+4. Open your browser and navigate to `http://localhost:3000`.
+
+## Scripts
+
+- `npm start`: Start the development server.
+- `npm run build`: Build the project for production.
+- `npm test`: Run tests.
+
+## Folder Structure
+
+```
+weatherapp/
+├── src/
+│   ├── components/    # Reusable UI components
+│   ├── pages/         # Application pages
+│   ├── assets/        # Static assets (images, icons, etc.)
+│   └── styles/        # Global and component-specific styles
+├── public/            # Public files
+├── package.json       # Project metadata and dependencies
+└── README.md          # Project documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Remaining Work
+- There is basically no design at the moment. This application needs a nice colour scheme.
+It is built on React/Bootstrap/MUI, which gives lots of possibilities for creating a reactive design with prebuild components.
+- There is a bug in the backend API, which means that dates are not serialized correctly.
+Therefore the dates are interpreted as local sometimes. That needs to be fixed.
+- There is very little work done with UX. Since the UI is so simple, it might be usable anyway, but there are some readability issues.
+- I put no time into designing the graph for temperatures, so it is a bit small and ugly.
