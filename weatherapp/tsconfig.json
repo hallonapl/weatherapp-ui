@@ -1,4 +1,9 @@
 {
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, // Optional, but often used with esModuleInterop
+    "jsx": "react-jsx"
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

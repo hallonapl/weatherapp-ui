@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid2";
 import { LineChart } from "@mui/x-charts";
 import type { } from '@mui/x-charts/themeAugmentation';
 import { useEffect, useState } from "react";
-import { WeatherMeasurement, WeatherResponse } from "../models/WeatherResponse";
+import { WeatherMeasurement, WeatherResponse } from "../../models/WeatherResponse";
 
 
 export default function WeatherDisplay({ location }: { location: string | null }) {

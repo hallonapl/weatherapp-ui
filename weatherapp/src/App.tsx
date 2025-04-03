@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import SideBar from './components/SideBar';
 import Grid from '@mui/material/Grid2';
-import WeatherDisplay from './components/WeatherDisplay';
+import WeatherDisplay from './components/WeatherDisplay/WeatherDisplay';
 
 function App() {
   const [location, setLocation] = useState<string | null>(null);
